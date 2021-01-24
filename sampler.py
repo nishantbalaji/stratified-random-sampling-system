@@ -20,17 +20,17 @@ print(AudioMothName)
 for bad_device in invalid_devices:
     df.drop(df[df['AudioMothCode']  == bad_device].index, inplace=True)
 
-
 # Remove the files with an invalid length.
 target_size = 46080360
 df.drop(df[df['FileSize'] < target_size].index, inplace=True)
 
 print(df)
 
-hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+#########################################################################################################################################################
 
 ''' make a list of starting hours for each audiomoth device. then count the number of unique hours in each device. divide the hours by 24 (should be 1 per hour if there are  24 hours, more if not. store remainder in a new value (x) and pick a random x number of hours to pick an extra value from) and store to (num) and go through each hour and randomly choose (num) elements to add to the list. repeat for each hour in the day, for each device'''
 
+hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
 
 output = pandas.DataFrame()
 
