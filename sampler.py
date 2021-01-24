@@ -17,6 +17,8 @@ for device in AudioMothName:
 AudioMothName = temp_list
 print(AudioMothName)
 
+for bad_device in invalid_devices:
+    df.drop(df[df['AudioMothCode']  == bad_device].index, inplace=True)
 
 
 # Remove the files with an invalid length.
