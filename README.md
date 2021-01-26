@@ -1,6 +1,6 @@
 # Stratified Random Sampling System
 
-This program will take a stratified random sample of the inputted csv file. The inputted file contains data displaying the various audio samples collected from different Audiomoth Devices. The outputted csv file will have 24 successful clips from each Audiomoth device, each clip representing a different hour of the day. To be considered successful, the clips had to be one minute in length. See the [Stratified Random Sampling Assignment ](https://github.com/nishantbalaji/stratified-random-sampling-system/blob/main/Stratified%20Random%20Sampling%20Assignment.pdf) pdf for more details.
+This program will take a stratified random sample of the inputted csv file. The inputted file contains data displaying the various audio samples collected from different Audiomoth Devices. The outputted csv file will have 24 successful clips from each Audiomoth device, each clip representing a different hour of the day. To be considered successful, the clips had to be one minute in length. See the [Stratified Random Sampling Assignment](https://github.com/nishantbalaji/stratified-random-sampling-system/blob/main/Stratified%20Random%20Sampling%20Assignment.pdf) pdf for more details.
 
 # Installation
 
