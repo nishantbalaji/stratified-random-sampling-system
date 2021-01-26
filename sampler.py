@@ -17,11 +17,12 @@ for device in AudioMothName:
 # Set the temp array to the original array
 AudioMothName = temp_list
 
+# Remove the files from devices known to be invalid
 for bad_device in invalid_devices:
     df.drop(df[df['AudioMothCode']  == bad_device].index, inplace=True)
 
 # Remove the files with an invalid length
-target_size = 46080360
+target_size = 46000000
 df.drop(df[df['FileSize'] < target_size].index, inplace=True)
 
 # All the possible hours that can be shown
@@ -43,7 +44,15 @@ for AudioMoth in AudioMothName:
     while df['AudioMothCode'].iloc[hour_index] == AudioMoth:
 
         # Record the current hour
-        curr_hour = int(df['StartDateTime'].iloc[hour_index][11:13])
+        temp = str(df['StartDateTime'].iloc[hour_index])
+
+        # If the value isnt the date string then skip it (or end the loop)
+        if len(temp) < 13:
+            if hour_index == len(df) - 1:
+                break
+            hour_index += 1
+        else:
+            curr_hour = int(temp[11:13])
 
         # If the hour isn't in the dictionary yet, add it
         if curr_hour not in hours:
@@ -60,14 +69,18 @@ for AudioMoth in AudioMothName:
         # Go to the next row
         hour_index += 1
 
-
     # Find the number of clips needed from each hour
-    num_per_hour = int(len(hours) / 24)
-    if num_per_hour != 0:
-        num_per_hour = int( 1 / num_per_hour)
+    if len(hours) < 24 and len(hours) != 0:
+        num_per_hour = int(24 / len(hours))
+    else:
+        num_per_hour = int(len(hours) / 24)
+        if num_per_hour != 0:
+            num_per_hour = int( 1 / num_per_hour)
 
     # Find the remaining number of clips needed
     extras = abs(len(hours) % 24)
+    if num_per_hour == 24:
+        extras = 0
 
     # Make a list of dictionarys holding the row data to add to the output file
     rows_list = []
@@ -90,7 +103,7 @@ for AudioMoth in AudioMothName:
             rows_list.append(rowToAdd)
 
             # Remove the used sample from the list
-            curr_list.remove(curr_list[rand_num]);
+            # curr_list.remove(curr_list[rand_num]);
 
 
     # If there are extra samples needed, randomly pick that many hours and
@@ -118,7 +131,7 @@ for AudioMoth in AudioMothName:
         rows_list.append(rowToAdd)
 
         # Remove the used sample from the list
-        curr_list.remove(curr_list[rand_num]);
+        #curr_list.remove(curr_list[rand_num]);
 
     # Create a temporary DataFrame from the rows_list, and then add it to the output DataFrame
     temp = pandas.DataFrame(rows_list)
