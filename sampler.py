@@ -139,3 +139,5 @@ for AudioMoth in AudioMothName:
 
 # Convert the DataFrame to a .csv file
 output.to_csv('stratified_random_sample.csv', index=False)
+
+print('Sample Completed!')
